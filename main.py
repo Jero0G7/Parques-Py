@@ -4,7 +4,7 @@ from src.tablero import Tablero
 
 pygame.init()
 pantalla = pygame.display.set_mode((600, 600))
-pygame.display.set_caption("Parques")
+pygame.display.set_caption("Parqués Clásico")
 
 tablero = Tablero()
 reloj = pygame.time.Clock()
