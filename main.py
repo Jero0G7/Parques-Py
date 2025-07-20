@@ -1,28 +1,20 @@
 import pygame
 import sys
+from src.tablero import Tablero
 
 pygame.init()
-screen = pygame.display.set_mode((600, 600))
+pantalla = pygame.display.set_mode((600, 600))
 pygame.display.set_caption("Parques")
 
-font = pygame.font.Font('src/fonts/EduSAHand.ttf', 36)
-
-title = font.render("¡Hola Mundo! Un nuevo juego de", True, (0, 0, 0))
-title2 = font.render("parques está por nacer", True, (0, 0, 0))
-
-title_rect = title.get_rect(center=(300, 280))
-title2_rect = title2.get_rect(center=(300, 320))
-
-clock = pygame.time.Clock()
+tablero = Tablero()
+reloj = pygame.time.Clock()
 
 while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
 
-    screen.fill((225, 225, 225))
-    screen.blit(title, title_rect)
-    screen.blit(title2, title2_rect)
+    tablero.dibujar(pantalla)
     pygame.display.flip()
-    clock.tick(60)
+    reloj.tick(60)
