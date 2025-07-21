@@ -4,7 +4,7 @@ from tablero import Tablero
 from consola import mostrar_tablero
 
 def usar_movimientos_extra(jugador, tablero, cantidad):
-    print(f"\n {jugador.nombre} tiene {cantidad} movimientos extra")
+    print(f"\n🟡 {jugador.nombre} tiene {cantidad} movimientos extra")
     movimientos_usados = 0
     while movimientos_usados < cantidad:
         fichas_movibles = [f for f in jugador.fichas if f.posicion >= 0 and not f.en_llegada]
@@ -37,21 +37,21 @@ def turno(jugador, tablero):
 
         if len(fichas_disponibles) == 1:
             ficha = fichas_disponibles[0]
-            print(f"Solo hay una ficha disponible. Se moverá automáticamente.")
+            print(f"Solo puedes mover una ficha .la moveremos por ti.")
         elif len(fichas_disponibles) > 1:
-            print("Fichas disponibles para mover:")
+            print("las fichas que puedes mover son:")
             for idx, f in enumerate(fichas_disponibles):
                 print(f"{idx + 1}. Ficha en posición {f.posicion}")
             while True:
                 try:
-                    seleccion = int(input("Elige el número de la ficha que deseas mover: "))
+                    seleccion = int(input("que ficha quieres: "))
                     if 1 <= seleccion <= len(fichas_disponibles):
                         ficha = fichas_disponibles[seleccion - 1]
                         break
                     else:
-                        print("Opción inválida. Intenta de nuevo.")
+                        print("Opción inválida. elige las que ves en pantalla.")
                 except ValueError:
-                    print("Por favor ingresa un número.")
+                    print("ingresa el numero por favor.")
         else:
             ficha = None
 
@@ -73,7 +73,7 @@ def turno(jugador, tablero):
             if jugador.pares_consecutivos == 3:
                 if jugador.ultima_ficha_movida:
                     jugador.ultima_ficha_movida.enviar_a_la_carcel()
-                    print(f" ¡{jugador.nombre} sacó 3 pares! Su última ficha fue enviada a la cárcel.")
+                    print(f"⚠️ ¡{jugador.nombre} sacó 3 pares! Su última ficha fue enviada a la cárcel.")
                 jugador.pares_consecutivos = 0
                 repetir = False
             else:
@@ -85,21 +85,21 @@ def turno(jugador, tablero):
         mostrar_tablero([jugador])
 
 def juego():
-    print(" Bienvenido a Parqués UN ")
-    num_jugadores = 4
+    print("🎲 Bienvenido a Parchis elige UN 🎲")
+    num_jugadores = 2
     colores_disponibles = ["rojo", "azul", "verde", "amarillo"]
     jugadores = []
 
     for i in range(num_jugadores):
-        nombre = input(f"\nNombre del jugador {i+1}: ")
+        nombre = input(f"\n NOMBRE DEL  JUGADOR  {i+1}: ")
         print("Colores disponibles:", ", ".join(colores_disponibles))
         while True:
-            color = input(f"{nombre}, elige un color: ").lower()
+            color = input(f"{nombre}, elige tu color campeon : ").lower()
             if color in colores_disponibles:
                 colores_disponibles.remove(color)
                 break
             else:
-                print("Color no disponible. Intenta de nuevo.")
+                print("ese color no es valido . elige uno de los que ves en pantalla.")
         jugador = Jugador(nombre, color)
         jugadores.append(jugador)
 
@@ -110,7 +110,7 @@ def juego():
         turno(jugadores[turno_actual], tablero)
 
         if jugadores[turno_actual].todas_en_llegada():
-            print(f"\n ¡{jugadores[turno_actual].nombre} ha ganado el juego!")
+            print(f"\n🎉 ¡{jugadores[turno_actual].nombre} has ganado FELICITACIONES!")
             break
 
         turno_actual = (turno_actual + 1) % len(jugadores)
