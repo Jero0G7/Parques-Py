@@ -10,7 +10,7 @@ def mostrar_tablero(jugadores):
                 else:
                     tablero[ficha.posicion] += f"/{inicial}{i+1}"
 
-    print("\n📍 Estado del tablero:")
+    print("\n Estado del tablero:")
     for i in range(0, 68, 10):
         fila = tablero[i:i+10]
         print(" ".join(fila))

@@ -4,7 +4,7 @@ from tablero import Tablero
 from consola import mostrar_tablero
 
 def usar_movimientos_extra(jugador, tablero, cantidad):
-    print(f"\n🟡 {jugador.nombre} tiene {cantidad} movimientos extra")
+    print(f"\n {jugador.nombre} tiene {cantidad} movimientos extra")
     movimientos_usados = 0
     while movimientos_usados < cantidad:
         fichas_movibles = [f for f in jugador.fichas if f.posicion >= 0 and not f.en_llegada]
@@ -73,7 +73,7 @@ def turno(jugador, tablero):
             if jugador.pares_consecutivos == 3:
                 if jugador.ultima_ficha_movida:
                     jugador.ultima_ficha_movida.enviar_a_la_carcel()
-                    print(f"⚠️ ¡{jugador.nombre} sacó 3 pares! Su última ficha fue enviada a la cárcel.")
+                    print(f" ¡{jugador.nombre} sacó 3 pares! Su última ficha fue enviada a la cárcel.")
                 jugador.pares_consecutivos = 0
                 repetir = False
             else:
@@ -85,8 +85,8 @@ def turno(jugador, tablero):
         mostrar_tablero([jugador])
 
 def juego():
-    print("🎲 Bienvenido a Parqués UN 🎲")
-    num_jugadores = 2
+    print(" Bienvenido a Parqués UN ")
+    num_jugadores = 4
     colores_disponibles = ["rojo", "azul", "verde", "amarillo"]
     jugadores = []
 
@@ -110,7 +110,7 @@ def juego():
         turno(jugadores[turno_actual], tablero)
 
         if jugadores[turno_actual].todas_en_llegada():
-            print(f"\n🎉 ¡{jugadores[turno_actual].nombre} ha ganado el juego!")
+            print(f"\n ¡{jugadores[turno_actual].nombre} ha ganado el juego!")
             break
 
         turno_actual = (turno_actual + 1) % len(jugadores)
