@@ -1,7 +1,8 @@
 class Ficha:
-    def __init__(self, color):
+    def __init__(self, color, id=0):
         self.color = color
-        self.posicion = -1          
+        self.id = id
+        self.posicion = -1   
         self.en_llegada = False     
 
     def sacar_de_la_carcel(self):

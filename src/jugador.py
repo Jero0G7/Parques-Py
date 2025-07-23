@@ -1,10 +1,11 @@
-from ficha import Ficha
+from src.fichas import Ficha
 
 class Jugador:
     def __init__(self, nombre, color):
         self.nombre = nombre
         self.color = color
-        self.fichas = [Ficha(color) for _ in range(4)]
+        self.id = id
+        self.fichas = [Ficha(color, i + 1) for i in range(4)]
         self.pares_consecutivos = 0
         self.ultima_ficha_movida = None  
 

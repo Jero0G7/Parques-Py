@@ -109,7 +109,8 @@ class Tablero:
         y = y_base * c + fila * mini + offset + mini // 4
         radio = mini // 6
         
-        pygame.draw.circle(pantalla, ficha.color, (x, y), radio)
+        color_rgb = self.convertir_color(ficha.color)
+        pygame.draw.circle(pantalla, color_rgb, (x, y), radio)
         pygame.draw.circle(pantalla, NEGRO, (x, y), radio, 2)
 
     def dibujar_ficha_llegada(self, pantalla, ficha, jugador_idx, ficha_idx, c):
@@ -139,18 +140,48 @@ class Tablero:
             x = x_base * c + c // 2
             y = (y_base + ficha_idx) * c + c // 2
         
-        pygame.draw.circle(pantalla, ficha.color, (x, y), radio)
+        color_rgb = self.convertir_color(ficha.color)
+        pygame.draw.circle(pantalla, color_rgb, (x, y), radio)
         pygame.draw.circle(pantalla, NEGRO, (x, y), radio, 2)
 
     def dibujar_ficha_tablero(self, pantalla, ficha, c):
         """Dibuja una ficha en el tablero principal"""
-        # Por ahora, las fichas en el tablero se dibujan en posiciones temporales
-        # Esto se puede expandir más adelante con la lógica del juego
         radio = c // 6
         
-        # Posición temporal (se puede mejorar con un mapeo real de posiciones)
-        x = 300  # Centro temporal
-        y = 300  # Centro temporal
+        # Mapeo de posiciones del tablero de Parqués
+        # Las posiciones van de 0 a 67 en el tablero lógico
+        posicion = ficha.posicion
         
-        pygame.draw.circle(pantalla, ficha.color, (x, y), radio)
+        # Definir las coordenadas del tablero (ajustar según el diseño)
+        # Este es un mapeo simplificado - se puede mejorar
+        if posicion <= 15:  # Lado superior
+            x = (6 + posicion) * c + c // 2
+            y = 6 * c + c // 2
+        elif posicion <= 30:  # Lado derecho
+            x = 9 * c + c // 2
+            y = (6 + (posicion - 16)) * c + c // 2
+        elif posicion <= 45:  # Lado inferior
+            x = (9 - (posicion - 31)) * c + c // 2
+            y = 9 * c + c // 2
+        elif posicion <= 60:  # Lado izquierdo
+            x = 6 * c + c // 2
+            y = (9 - (posicion - 46)) * c + c // 2
+        else:  # Posiciones finales
+            x = 7 * c + c // 2
+            y = 7 * c + c // 2
+        
+        # Convertir color de string a RGB
+        color_rgb = self.convertir_color(ficha.color)
+        
+        pygame.draw.circle(pantalla, color_rgb, (x, y), radio)
         pygame.draw.circle(pantalla, NEGRO, (x, y), radio, 2)
+
+    def convertir_color(self, color_str):
+        """Convierte el nombre del color a RGB"""
+        colores = {
+            "Rojo": ROJO,
+            "Verde": VERDE,
+            "Azul": AZUL,
+            "Amarillo": AMARILLO
+        }
+        return colores.get(color_str, NEGRO)
