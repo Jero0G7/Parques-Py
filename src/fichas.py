@@ -1,20 +1,20 @@
-import pygame
-import sys
-from src.tablero import Tablero
+class Ficha:
+    def __init__(self, color):
+        self.color = color
+        self.posicion = -1          
+        self.en_llegada = False     
 
-pygame.init()
-pantalla = pygame.display.set_mode((600, 600))
-pygame.display.set_caption("Parqués Clásico")
+    def sacar_de_la_carcel(self):
+        self.posicion = 0  
 
-tablero = Tablero()
-reloj = pygame.time.Clock()
+    def mover(self, pasos):
+        if self.posicion != -1 and not self.en_llegada:
+            self.posicion += pasos
+            if self.posicion >= 67:
+                self.en_llegada = True
+                self.posicion = -2  
+                print(f"Ficha {self.color} llegó a la meta 🎯")
 
-while True:
-    for evento in pygame.event.get():
-        if evento.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-
-    tablero.dibujar(pantalla)
-    pygame.display.flip()
-    reloj.tick(60)
+    def enviar_a_la_carcel(self):
+        print(f"Ficha {self.color} fue enviada a la cárcel")
+        self.posicion = -1
