@@ -10,7 +10,7 @@ COLORES = {
 class FichaGrafica:
     def __init__(self, color, posicion, radio=18):
         self.color = color
-        self.posicion = posicion  # (x, y) en píxeles
+        self.posicion = posicion
         self.radio = radio
 
     def dibujar(self, pantalla):
@@ -19,7 +19,6 @@ class FichaGrafica:
 
 def crear_fichas():
     fichas = []
-    # Posiciones iniciales aproximadas para cada equipo (ajusta según tu tablero)
     posiciones = {
         "rojo": [(60, 60), (120, 60), (60, 120), (120, 120)],
         "verde": [(480, 60), (540, 60), (480, 120), (540, 120)],

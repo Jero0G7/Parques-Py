@@ -18,16 +18,12 @@ def lanzar_dados(debug=False, input_func=None):
                     return d1, d2
                 else:
                     if input_func:
-                        # Si tenemos una función de input, no podemos mostrar mensajes directamente
-                        # El manejo se hará en el main.py
                         pass
                     else:
                         print("⚠️ Valores inválidos. Usando aleatorio.")
                     return random.randint(1, 6), random.randint(1, 6)
             except ValueError:
                 if input_func:
-                    # Si tenemos una función de input, no podemos mostrar mensajes directamente
-                    # El manejo se hará en el main.py
                     pass
                 else:
                     print("⚠️ Valores inválidos. Usando aleatorio.")
